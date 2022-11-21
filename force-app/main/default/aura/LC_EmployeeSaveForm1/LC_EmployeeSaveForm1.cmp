@@ -1,0 +1,993 @@
+<aura:component>
+    <aura:attribute name="NewEmp" type="Employees__c[]" default="{'sobjectType' : 'Employees__c'}"/>
+    <aura:attribute name="newsel" type="Boolean" default="false"/>
+    <aura:attribute name="recID" type="Id"/>
+    <aura:attribute name="displayAdditional" type="boolean" default="false"/>
+    <aura:attribute name="displayAdditionalAwards" type="boolean" default="false"/>
+     <aura:attribute name="showError" type="boolean" default="false"/>
+    <aura:attribute name="toastMessage" type="String" />
+    <aura:attribute name="toastIconName" type="String" />
+    <lightning:recordEditForm aura:id="recordEditForm" objectApiName="Employees__c"
+                              onerror="{!c.handleError}" onsuccess="{!c.cersub}">
+         <lightning:messages />
+        
+        
+        <center>
+            <div style="font-size: 20px;">  New Employee Form </div>
+        </center>
+        <lightning:card>
+        <div class="slds-scrollable_y" style="height:25rem;">
+        <div class="stylebackrounddesign">
+           
+            
+            <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Employee Details</span>
+                </h3>
+             <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+         
+                <lightning:inputField fieldName="Employee_photo__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Wissen_Employee_ID__c" required="true" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="OwnerId" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%">
+                <lightning:inputField fieldName="Name" required="true"/>
+            </lightning:layoutItem>
+               
+         <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Last_Name__c" />
+         </lightning:layoutItem>
+            </lightning:layout>
+            
+          
+        <lightning:layout >
+           <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Personal_Email__c" />
+           </lightning:layoutItem>
+       
+              <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Working_Email__c" required="true" />
+             </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+              <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Country_Code__c" />
+             </lightning:layoutItem>
+        
+         <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Primary_Contact__c" required="true"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Secondary_Contact_Number__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Date_Of_Birth__c" required="true" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+            <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Gender__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Designation__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Wissen_Domain_CEO__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Brief_Profile_Headline__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Primary_Skills__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Secondary_Skills__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+        <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Tertiary_Skills__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+                
+        </div>
+        
+            <div>
+                
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Emergency Contact Details</span>
+                </h3>
+                
+                 <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Contact_Details__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Relationship__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+                
+            </div>
+            
+             <div>
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Academic Details</span>
+                </h3>
+                 
+                 <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Secondary_School_Education__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Year_of_Passout__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+                 
+                 <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="P__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Year_of_Passout__c" />
+            </lightning:layoutItem>
+                 </lightning:layout>
+                     
+                 <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Graduation__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Year_of_Passout__c" />
+            </lightning:layoutItem> 
+                 </lightning:layout>
+                 
+                     <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Post_Graduation__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Year_of_Passout__c" />
+            </lightning:layoutItem> 
+            </lightning:layout> 
+                
+            </div>
+            
+            <div>
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Address Information</span>
+                </h3>
+            </div>
+            
+                <lightning:layout horizontalAlign="space">
+        <lightning:layoutItem >
+            <div>
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Present Address</span>
+                </h3>
+            
+            <br/>
+                <div class="slds-size--12-of-12">
+                    <lightning:inputField fieldName="Address_Line1__c" aura:id="add1"/>
+                    <br/>
+                    <lightning:inputField fieldName="Address_Line2__c" aura:id="add2"/>
+                    <br/>
+                    <lightning:inputField fieldName="Land_Mark__c" aura:id="lan" />
+                    <br/>
+                    <lightning:inputField fieldName="City__c" aura:id="ct1" />
+                    <br/>
+                    <lightning:inputField fieldName="State__c" aura:id="sta1" />
+                    <br/>
+                    
+                      <lightning:inputField fieldName="District__c" aura:id="dis2"/>
+                    
+                    <br/>
+                   
+                        <lightning:inputField fieldName="Postal_Code__c" aura:id="pos"/>
+                   <br/>
+                    
+                    
+<lightning:inputField fieldName="Is_Present_address_same_as_Permanen_addr__c" aura:id="checkBoxId" onchange="{!c.onClickCheckBox}"/>
+                    <br/>
+                    
+                </div>
+            </div>
+                    </lightning:layoutItem>
+                
+                <lightning:layoutItem >
+            <div>
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Permanent Address</span>
+                </h3>
+                <br/>
+                <div class="slds-size--12-of-12">
+                     
+                      
+                    <lightning:inputField fieldName="Address_Line1__c" value="{!v.address2}" />
+                    <br/>
+                    <lightning:inputField fieldName="Address_Line2__c" value="{!v.address2}" />
+                    <br/>
+                     <lightning:inputField fieldName="Land_Mark2__c" value="{!v.landmark}"/>
+                    <br/>
+                    <lightning:inputField fieldName="City1__c" value="{!v.city}" />
+                    <br/>
+                    <lightning:inputField fieldName="state2__c" value="{!v.state}"/>
+                    <br/>
+                    <lightning:inputField fieldName="District2__c" value="{!v.distact}" />
+                    <br/>
+                        <lightning:inputField fieldName="Postal_Code2__c" value="{!v.postalcode}" />
+                   <br/>
+                    </div>
+            </div>
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+            <div>
+                
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Passport Details</span>
+                </h3>
+                <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="5%">
+                        <lightning:inputField fieldName="PassportNumber__c" >
+                        </lightning:inputField>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%">
+                        <lightning:inputField fieldName="X1Passport_photo_Softcopy_hard_copy__c" >
+                        </lightning:inputField>
+                    </lightning:layoutItem>
+                    </lightning:layout>
+                
+                    <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="5%">
+                        <lightning:inputField fieldName="Passport_Issued_Date__c" >
+                        </lightning:inputField>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%">
+                        <lightning:inputField fieldName="Passport_Expired_Date__c" >
+                        </lightning:inputField>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+                 <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="5%">
+                        <lightning:inputField fieldName="Type_Of_Passport__c" >
+                        </lightning:inputField>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+             
+        <div>
+            <h3 class="slds-section-title--divider">Working Details</h3>
+        <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+                 
+        <lightning:inputField fieldName="Country__c" required="true" />
+            </lightning:layoutItem>
+       
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Company_Location__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+           
+            <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Level__c" />
+            </lightning:layoutItem>
+       
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Date_Of_Joining__c" required="true" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+            <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="FTE_TM__c" />
+            </lightning:layoutItem>
+        
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Reporting_Manager__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+        </div>
+        
+        <div>
+        <h3 class="slds-section-title--divider">Project Allocation</h3>
+        <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Bench_start_date__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Bench_End_Date__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Emp_Status__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Project__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        </div>
+        
+        <div>
+            <h3 class="slds-section-title--divider">Employee Experience</h3>
+            
+           <!-- <c:LC_AddExperience/> -->
+        <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Role__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Active_Role__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Prev_Admin_Experience__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Organization_1__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Start_Date__c" />
+            </lightning:layoutItem>
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="End_Date__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:input type="toggle" label="Do you want to fill Additional Experience?" name="togglevalue" checked="{!v.displayAdditional}" aura:id="addInfo" onchange="{!c.handleAdditonalInfo}" />
+                            <aura:if isTrue="{!not(v.displayAdditional)}">
+                                
+                            <!--    <lightning:button class="slds-m-top_medium slds-align_absolute-center" variant="brand" label="Submit" onclick="{! c.handleClick}" />  -->
+                                
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!v.displayAdditional}">
+                                <div class="slds-p-top_medium"> <h1 class="slds-page-header__title slds-truncate slds-align-middle slds-p-bottom_medium blue" title="Additional Information">Additional Experience Information:</h1>  </div>
+                                 <div  class="slds-text-heading_small"> 
+                            
+            
+            <lightning:layout >
+             <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Prev_Development_Experience__c" />
+            </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Organization_2__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Experience_2_Start_Date__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Experience_2_End_Date__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Other_Experience__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Organization_3__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Experience_3_Start_Date__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Experience_3_End_Date__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+                                                    
+        </div>
+            </aura:if>
+            </div>
+        <div>
+            <h3 class="slds-section-title--divider">Assets Details</h3>
+        
+         <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Laptop_Assign__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Laptop_Details__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Laptop_Using_Start_Date__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Laptop_Using_End_Date__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+         <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Data_Card__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Software_Access__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+       
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="PaymentForLapTop__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Other_Assets__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Comments__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+            
+        </div>
+        
+        <div>
+            <h3 class="slds-section-title--divider">Achievements</h3>
+          <!--  <c:LC_AddAwards/> -->
+         <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Award1__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Award1_Given_By__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+            
+            <lightning:input type="toggle" label="Do you want to fill Additional Awards?" name="togglevalue" checked="{!v.displayAdditionalAwards}" aura:id="addInfo" onchange="{!c.handleAdditonalInfo}" />
+                            <aura:if isTrue="{!not(v.displayAdditionalAwards)}">
+                                
+                               <!-- <lightning:button class="slds-m-top_medium slds-align_absolute-center" variant="brand" label="Submit" onclick="{! c.handleClick}" /> -->
+                                
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!v.displayAdditionalAwards}">
+                                <div class="slds-p-top_medium"> <h1 class="slds-page-header__title slds-truncate slds-align-middle slds-p-bottom_medium blue" title="Additional Information">Additional Awards Information:</h1>  </div>
+                                 <div  class="slds-text-heading_small"> 
+            
+       
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Award2__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Award2_Given_By__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+         <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Award3__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Award3_Given_By__c" />
+            </lightning:layoutItem>
+            </lightning:layout>
+        
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Award4__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Award4_Given_By__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Award5__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Award5_Given_By__c" />
+            </lightning:layoutItem>
+        </lightning:layout> 
+                                </div>
+            </aura:if>
+        </div>
+            
+        <center>
+            <div style="font-size: 20px;">  On Boarding Details </div>
+        </center>
+            
+            <div>
+                <h3 class="slds-section-title--divider">Resource Request Form</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_1__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_1__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments1__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            
+            <div>
+                <h3 class="slds-section-title--divider">Resume</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_2__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_2__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_2__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            
+            <div>
+                <h3 class="slds-section-title--divider">Offer Letter</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_3__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_3__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_3__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            
+            <div>
+                <h3 class="slds-section-title--divider">Resource Request Form</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_4__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_4__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_4__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+             <div>
+                <h3 class="slds-section-title--divider">Schedule a video call with new joinee and take screenshot </h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_5__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_5__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_5__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Send the BGC Application Form to the candidate</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_6__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_6__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_6__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Interview Screenshot (Wissen / Client)</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_7__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_7__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_7__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Initiating the BGC with the vendor</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_8__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_8__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_8__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Intimating the Network and Accounts dept / Front office</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_9__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_9__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_9__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Initiate a mail for Employee No, Email ID creation</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_10__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_10__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_10__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Experience docs (Relieving Letter, Payslips, Form-16)</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_11__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_11__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_11__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+             <div>
+                <h3 class="slds-section-title--divider">Educational docs</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_12__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_12__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_12__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            
+            
+            <div>
+                <h3 class="slds-section-title--divider">ID Proofs (Aadhar, PAN and Passport)</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_13__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_13__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_13__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Passport photo (Softcopy / hard copy 3)</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_14__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_14__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_14__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Collect their Bank account details</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_15__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_15__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_15__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Technical Certification if any</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_16__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_16__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_16__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Update the Employee Profile Creation on HRMS Tool</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_17__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_17__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_17__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Login Credentials to access HRMS Tool</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_18__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_18__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_18__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Appointment letter</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_19__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_19__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_19__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Confirmation Letter</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_20__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_20__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_20__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            <div>
+                <h3 class="slds-section-title--divider">Access and ID card Initiation</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_21__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_21__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_21__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+
+            <div>
+                <h3 class="slds-section-title--divider">Desk / Cabin Allotment</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_22__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_22__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_22__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+
+            <div>
+                <h3 class="slds-section-title--divider">Initiate a mail to issue System / Laptop</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_23__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_23__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_23__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+
+            <div>
+                <h3 class="slds-section-title--divider">Wissen Email ID mail to be shared</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_24__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_24__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_24__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+
+            <div>
+                <h3 class="slds-section-title--divider">Initiate for PF Account</h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="3%" >
+        <lightning:inputField fieldName="Initiated_Date_25__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Status_25__c" />
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="3%" >
+                <lightning:inputField fieldName="Comments_25__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+
+            
+            
+           
+            
+             <center>
+            <div style="font-size: 20px;">  Off Boarding Details </div>
+        </center>
+            <div>
+               <h3 class="slds-section-title--divider">ITIS Department Activity </h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Critical_passwords__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Deactivation_of_Biometric_Access__c" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+             <lightning:layout>
+               <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Remove_Telephone_Passcodes_if_assigned__c" />
+            </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Remove_access_to_all_generic_project__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+                
+                <lightning:layout>
+               <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Wissen_Customer_assets__c" />
+            </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Deactivation_of_Wissen_Email_Id__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+            </div>
+            
+            <div>
+               <h3 class="slds-section-title--divider">HR Department Activity </h3>
+                <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="5%" >
+        <lightning:inputField fieldName="Replacement_Plan__c" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Customer_Assets_handover_like_SSOID_ID__c" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                
+             <lightning:layout>
+               <lightning:layoutItem padding="around-small" size="5%" >
+                <lightning:inputField fieldName="Leave_adjustments__c" />
+            </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+            
+            <div>
+            	<h3 class="slds-section-title--divider">Finance Department Activity </h3>
+                    <lightning:layout>
+                   <lightning:layoutItem padding="around-small" size="5%" >
+                    <lightning:inputField fieldName="outstanding_dues_by_advances_material__c" />
+                </lightning:layoutItem>
+                    </lightning:layout>
+            </div>
+            	
+            <div>
+            <h3 class="slds-section-title--divider">ADMIN ACTIVITY </h3>
+                    <lightning:layout>
+                   <lightning:layoutItem padding="around-small" size="5%" >
+                    <lightning:inputField fieldName="Taking_back_admin_assets_like_Telephone__c" />
+                </lightning:layoutItem>
+                    </lightning:layout>
+            </div>
+            
+        </div>
+    </lightning:card>
+        <div>
+        <center>
+        <lightning:button type="submit" variant="brand" name="Submit" label="Save" class="slds-m-top_medium"/>
+            <aura:if isTrue="{!v.showError}">
+                <div class="divclassError" >
+                    <div class="slds-notify slds-notify_toast" role="status" aura:id="toast-area">
+                        <span class="slds-assistive-text">Error</span>
+                        <span class="slds-icon_container slds-icon-utility-Error slds-m-right_small slds-no-flex slds-align-top" >
+                            <lightning:icon iconName="{!v.toastIconName}" alternativeText="" size="small" variant="inverse"/>
+                        </span>
+                        <div class="slds-notify__content">
+                            <h2 class="slds-text-heading_small ">{!v.toastMessage} </h2>
+                        </div>
+                        <div class="slds-notify__close">
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            <lightning:button label="Back" variant="brand" class="slds-m-top_medium" onclick="{!c.navigateback}" />
+        </center>
+        </div>
+    </lightning:recordEditForm>
+    
+</aura:component>

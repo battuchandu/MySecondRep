@@ -1,0 +1,7 @@
+<aura:component >
+	<aura:attribute name="filterBy" type="Object[]" access="global"  description="Javascript object containing field and value to filter" />
+    <aura:attribute name="selAccValue" type="String" description="matched Id" access="global"/>        
+    <aura:attribute name="selConValue" type="String" description="matched Id" access="global"/>        
+    <aura:attribute name="filterConBy" type="Object[]" access="global"  description="Javascript object containing field and value to filter" />
+          <c:wissencomp/> 
+</aura:component>

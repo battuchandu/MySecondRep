@@ -1,0 +1,82 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"  access="global" >
+    <aura:attribute name="displayForm" type="boolean" default="true"/>
+    <aura:attribute name="displayOtherField" type="boolean" default="false"/>
+    <aura:attribute name="eventOptionVal" type="String"/>
+    <aura:attribute name="mainpage" type="string" default="registration"/>
+    <aura:attribute name="showpage" type="boolean" default="true"/>
+    <aura:attribute name="Alumni1" type="Employees__c" default="{'sobjectType':'Employees__c',
+                                                               'Full_Name__c':'','Working_Email__c':''
+                                                                }"/>  
+    <aura:if isTrue="{!v.mainpage == 'registration'}">
+    <lightning:layout horizontalAlign="end" verticalAlign="start" multipleRows="true">
+     
+        <lightning:layoutItem flexibility="auto" size="12" largeDeviceSize="12" mediumDeviceSize="12" smallDeviceSize="12" padding="around-small">
+            <div class="bgcolor" style="background-color:#e8c990" onclick="{!c.clickLogo}"><img  src="/resource/Wissen"  /></div>            
+        </lightning:layoutItem> 
+        
+        <div class="slds-align_absolute-center">
+        <h1 class="slds-page-header__title slds-truncate slds-align-middle slds-p-bottom_medium">
+           <div class="blue" >
+                    Test </div>
+                   <div class="green"> October13, 2022</div>
+                    <div class="orange">Bangalore,IN.</div></h1>
+                    </div>
+            </lightning:layout>
+    <div class="slds-align_center" style="background-color:#809888">
+    
+        <div  style="background-color:#eae5a6 "> 
+        <lightning:layout horizontalAlign="spread" verticalAlign="start" multipleRows="true">
+            <lightning:layoutItem flexibility="auto" size="12" largeDeviceSize="12" mediumDeviceSize="12" padding="around-small" >
+                <div class="slds-text-heading_small">    This registration page is for current wissen professionals only. If you are an alum (OR) retired PPMD, please <a href="https://www.wissen.com" target="_blank">click here </a> To Register.</div>                                        
+                <div class="slds-text-align_left slds-text-heading_small" >  Alumni Registration Form  </div>  <div class="slds-box" >  
+                
+                <aura:if isTrue="{!v.showpage}">
+                    <div class="slds-align_absolute-center"> <div class="cds">To Register (OR) Access your existing registration,</div> please Enter FirstName,LastName and Email Address exactly as they appear in the invitation you received. </div>  
+                    <div class="slds-align_absolute-center"> 
+                        <div class="slds-form-element">
+                            
+                            <lightning:input name="input" label="First Name" placeholder="First Name" required="true"  value="{!v.Alumni1.Name}" />
+                            <lightning:input name="input" label="Last Name" placeholder="Last Name" required="true"  value="{!v.Alumni1.Last_Name__c}" />
+                        </div>    
+                    </div>             
+                    <div class="slds-align_absolute-center">
+                        <div class="slds-form-element">
+                            <lightning:input type="email" aura:id="emailValue" name="input" label="Email Address" placeholder="Email Id"  required="true"  value="{!v.Alumni1.Working_Email__c}" />
+                        </div>   
+                    </div>      
+                    <lightning:button class="slds-m-top_medium slds-align_absolute-center" variant="brand" label="Continue" onclick="{! c.createAccount1}" />   
+                                    
+               		 <aura:set attribute="else">
+                        <div class="slds-box">                        
+                            <div class="slds-text-heading_small"> <div class="slds-text-align_center"><p>Email Id Not Existed</p></div></div>
+                        </div>
+                            <lightning:button class="slds-m-top_medium slds-align_absolute-center" variant="brand" label="Registration" onclick="{! c.Registration}" />                        
+                     </aura:set>
+                    </aura:if>
+                <br/> 
+                <div class="slds-align_absolute-center" style="green"><a href="https://wisseninfotech86-dev-ed.lightning.force.com/lightning/n/Wissen_Infotech" target="_blank">Contact Registration Assistance</a></div>
+                </div> 
+            </lightning:layoutItem>
+        </lightning:layout> </div> 
+       
+          </div> 
+    <br></br>&nbsp;
+    
+    <div style="background-color:#809888">
+    <lightning:layout horizontalAlign="spread" verticalAlign="start" multipleRows="true">
+        <lightning:layoutItem flexibility="auto" size="12" largeDeviceSize="12" mediumDeviceSize="12" padding="around-small">
+            <div class="slds-box" style="background-color:#e8c990" >
+
+                <p class="h1"><span><a href="https://www2.deloitte.com/us/en/legal/terms-of-use.html">Legal</a>&nbsp;|&nbsp;<a href="https://www2.wissen.com/us/en/legal/terms-of-use.html">Privacy</a><span class="slds-float_right"><div class="brown">Member of Wissen Touche Tohmatsu Limited </div></span></span></p>
+                <p class=" slds-m-top_small slds-text-body_small">Wissen refers to one or more of Wissen Touche Tohmatsu Limited, a UK private company limited by guarantee ( DTTL ), its network of member firms, and their related entities. DTTL and each of its member firms are legally separate and independent entities. DTTL (also referred to as Wissen Global ) does not provide services to clients. Please see<a href="https://www2.Wissen.com/us/en/pages/about-Wissen/articles/about-Wissen.html" target="_blank">click here</a>  for a detailed description of the legal structure of Wissen LLP and its subsidiaries. Certain services may not be available to attest clients under the rules and regulations of public accounting.</p>
+                <div class="line"> <p class="slds-text-align_center">Copyright © 2017 Wissen Development LLC. All rights reserved.</p></div>
+                </div>
+               
+        </lightning:layoutItem>
+    </lightning:layout>
+    </div>
+    </aura:if>
+    <aura:if isTrue="{!v.mainpage == 'exist'}">  
+        <c:wissencomp/> 
+    </aura:if>
+</aura:component>

@@ -1,0 +1,28 @@
+<aura:component controller="EmployeeCelebrations" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     
+      <!--  <aura:iteration items="{!v.rec}" var="curr">
+       
+                <ui:outputText value="{!curr.Wissen_Employee_ID__c}" /> -
+                <ui:outputText value="{!curr.Full_Name__c}"/> (<ui:outputText value="{!curr.Date_Of_Birth__c}"/>) , A Happy Birthday<br/>
+                
+        </aura:iteration>-->
+    <lightning:card>
+     <div class="slds-text-heading_large">  Birthday Celebration</div>
+    <!-- the container element determine the height of the datatable -->
+    <div class="dropzone"   style="height: 200px ">
+        <lightning:datatable
+                keyField="id"
+                data="{! v.data }"
+                columns="{! v.columns }"
+                hideCheckboxColumn="true"/> 
+    </div>
+        </lightning:card>
+        
+			<!--<lightning:button variant="brand" label="Wish" title="Base action" onclick="{!c.navigatetoform}" />-->
+    <lightning:button variant="brand" label="Wish" onclick="{!c.navigatetoform1}" />  
+</aura:component>

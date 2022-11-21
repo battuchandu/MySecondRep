@@ -1,0 +1,31 @@
+<aura:component controller="CertificationRecords" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	
+    <!-- attributes -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <!-- handlers-->
+                <!--<ui:outputURL value="https://www.wissen.com/" label="WebSite" />-->
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <!--<div>
+    <img  class="image" src="{!$Resource.Wissen}" />
+
+    
+    </div>-->
+    <!--<div >
+        <c:EmployeeRecords/>
+    </div>-->
+    
+    <lightning:card>
+        
+    <div class="slds-text-heading_large"> Recent Certifications</div>
+    <!-- the container element determine the height of the datatable -->
+    <div class="dropzone"   style="height: 200px ">
+        <lightning:datatable
+                keyField="id"
+                data="{! v.data }"
+                columns="{! v.columns }"
+                hideCheckboxColumn="true"/> 
+    </div>
+        </lightning:card>
+</aura:component>

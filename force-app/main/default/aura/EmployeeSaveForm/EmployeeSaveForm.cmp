@@ -1,0 +1,151 @@
+<aura:component >
+    <aura:attribute name="acc" type="Employees__c" default="{'sobjectType' : 'Employees__c'}"/>
+
+       <div class="slds-form_horizontal slds-form slds-grid slds-wrap">
+    
+        <h3 class="slds-section-title--divider">Employee Details</h3>
+    <br></br>
+        <lightning:input label="Wissen Employee ID" class="slds-size_1-of-2" value="{!v.acc.Wissen_Employee_ID__c}" required="true"/>
+            
+        <lightning:input label="First Name" value="{!v.acc.Name}" class="slds-size_1-of-2" required="true" field-level-help="Test Help Text"/>
+        
+        <lightning:input label="Last Name" class="slds-size_1-of-2" value="{!v.acc.Last_Name__c}"/>
+        
+        <lightning:input label="Personal Email" class="slds-size_1-of-2" value="{!v.acc.Personal_Email__c}"/>
+        
+        <lightning:input label="Working Email" class="slds-size_1-of-2" value="{!v.acc.Working_Email__c}" required="true" />
+       
+        <lightning:input label="Primary_Contact" class="slds-size_1-of-2" value="{!v.acc.Primary_Contact__c}"/>
+        
+        <lightning:input label="Secondary Contact Number" class="slds-size_1-of-2" value="{!v.acc.Secondary_Contact_Number__c}"/>
+        
+        <lightning:input label="Date of Birth" type="date" class="slds-size_1-of-2" value="{!v.acc.Date_Of_Birth__c}"/>
+        
+        <lightning:input label="Brief Profile/Headline" class="slds-size_1-of-2" value="{!v.acc.Brief_Profile_Headline__c}" />
+        
+        <lightning:input label="Primary Skills" class="slds-size_1-of-2" value="{!v.acc.Primary_Skills__c}"/>
+        
+        <lightning:input label="Secondary Skills" class="slds-size_1-of-2" value="{!v.acc.	Secondary_Skills__c}"/>
+        
+        <lightning:input label="Tertiary Skills" class="slds-size_1-of-2" value="{!v.acc.Tertiary_Skills__c}"/>
+        
+           
+           
+    </div>
+    
+    <div >
+    <div>
+        
+        <h3 class="slds-section-title--divider">Working Details</h3>
+        
+        <c:LC_EmployeeDependentPicklist/> 
+        
+        
+        <lightning:input label="Date Of Joining" type="date" value="{!v.acc.Date_Of_Joining__c}" class="slds-size_1-of-2"/>
+        </div>
+        </div>
+    
+        <div>
+    <div>
+        <h3 class="slds-section-title--divider">Project Allocation</h3>
+        <lightning:input label="Bench Start Date" type="date" value="{!v.acc.Bench_start_date__c}" class="slds-size_1-of-2" />
+        </div>
+    <div>
+        <lightning:input label="Bench End Date" type="date" value="{!v.acc.Bench_End_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+            
+     </div>
+    
+    <div>
+        
+    <div>
+        <h3 class="slds-section-title--divider">Employee Experience</h3>
+        <lightning:input label="Experience 1" value="{!v.acc.Prev_Admin_Experience__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Organization 1" value="{!v.acc.	Organization_1__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 1 Start Date" type="date" value="{!v.acc.Start_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 1 End Date"  type="date" value="{!v.acc.End_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 2" value="{!v.acc.Prev_Development_Experience__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Organization 2" value="{!v.acc.Organization_2__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 2 Start Date" type="date" value="{!v.acc.Experience_2_Start_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 2 End Date" type="date" value="{!v.acc.Experience_2_End_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 3" value="{!v.acc.Other_Experience__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Organization 3" value="{!v.acc.Organization_3__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 3 Start Date" type="date" value="{!v.acc.Experience_3_Start_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Experience 3 End Date" type="date" value="{!v.acc.Experience_3_End_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+            
+        </div>
+    
+    <div>
+        
+    <div>
+        <h3 class="slds-section-title--divider">Assets Details</h3>
+        <lightning:input label="Laptop Using Start Date" type="date" value="{!v.acc.Laptop_Using_Start_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Laptop Using End Date" type="date" value="{!v.acc.Laptop_Using_End_Date__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Data Card" value="{!v.acc.Data_Card__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Software Access" value="{!v.acc.Software_Access__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Payment For Laptop" value="{!v.acc.PaymentForLapTop__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Other Assets" value="{!v.acc.Other_Assets__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Comments" value="{!v.acc.Comments__c}" class="slds-size_1-of-2"/>
+        </div>
+            
+        </div>
+    <div>
+        
+    <div>
+        <h3 class="slds-section-title--divider">Achievements</h3>
+        <lightning:input label="Award1" value="{!v.acc.Award1__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Award1 Given By" value="{!v.acc.Award1_Given_By__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Award2" value="{!v.acc.Award2__c}" class="slds-size_1-of-2"/>
+        </div>
+    <div>
+        <lightning:input label="Award2 Given By" value="{!v.acc.Award2_Given_By__c}" class="slds-size_1-of-2"/>
+        </div>
+    
+    
+        <center>
+            <lightning:button label="Save"  onclick="{!c.save}"/>
+        </center>
+            
+    </div>
+
+
+</aura:component>

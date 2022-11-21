@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-p-top_small">
+        <lightning-card title="Employees Search">
+           <section>
+               <lightning-input label="Search By Name" type="search" onchange={handleName} value={filters.name}></lightning-input>
+           </section>           
+        <lightning-accordion allow-multiple-sections-open>
+            <lightning-accordion-section name="Designation" label="Employee Designation">
+                <template if:true={designations.data}>
+                    <template for:each={designations.data.values} for:item="designation">
+                        <lightning-input key={designation.value} type="radio" data-value={designation.value}
+                                        label={designation.label} name="designation"  onchange={handleDesignation}></lightning-input>
+                    </template>
+                </template>
+               
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="Status" label="Employee Status">
+                <template if:true={statuses.data}>
+                    <template for:each={statuses.data.values} for:item="status">
+                        <lightning-input key={status.value} type="radio" data-value={status.value}
+                                        label={status.label} name="status"  onchange={handleStatus}></lightning-input>
+                    </template>
+                </template>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="Location" label="Company Location">
+                <template if:true={locations.data}>
+                    <template for:each={locations.data.values} for:item="location">
+                        <lightning-input key={location.value} type="radio" data-value={location.value}
+                                        label={location.label} name="location"  onchange={handleLocation}></lightning-input>
+                    </template>
+                </template>
+            </lightning-accordion-section>
+            <lightning-accordion-section name="Domain" label="COE Domain">
+                <template if:true={domains.data}>
+                    <template for:each={domains.data.values} for:item="domain">
+                        <lightning-input key={domain.value} type="radio" data-value={domain.value}
+                                        label={domain.label} name="domain"  onchange={handleDomain}></lightning-input>
+                    </template>
+                </template>
+            </lightning-accordion-section>
+            <lightning-accordion-section name="Category" label="Category">
+                <template if:true={categories.data}>
+                    <template for:each={categories.data.values} for:item="category">
+                        <lightning-input key={category.value} type="radio" data-value={category.value}
+                                        label={category.label} name="category"  onchange={handleCategory}></lightning-input>
+                    </template>
+                </template>
+            </lightning-accordion-section>
+            <lightning-accordion-section name="Location" label="IT Experience">
+            </lightning-accordion-section>
+        </lightning-accordion>
+        </lightning-card>
+    </div>
+</template>

@@ -1,0 +1,138 @@
+<aura:component controller="EmployeePickListValues" implements="flexiPage:availableForAllPageTypes" >
+    <aura:attribute name="empName" type="String"/>
+    <aura:attribute name="desOptions" type="List"/>
+    <aura:attribute name="desOption" type="List"/>
+    
+    <aura:attribute name="statusOptions" type="List"/>
+    <aura:attribute name="status" type="List"/>
+    
+    <aura:attribute name="locations" type="List"/>
+    <aura:attribute name="location" type="List"/>
+    
+    <aura:attribute name="categories" type="List"/>
+    <aura:attribute name="category" type="List"/>
+    
+    <aura:attribute name="domains" type="List"/>
+    <aura:attribute name="domain" type="List"/> 
+    
+    
+    
+    <aura:attribute name="Exp" type="Map" default="{'pAdmin':{eFrom:'',eTo:''},'pDev':{eFrom:'',eTo:''},'oexp':{eFrom:'',eTo:''},
+                                                         'tAdmin':{eFrom:'',eTo:''},'tDev':{eFrom:'',eTo:''},
+                                                         'tIT':{eFrom:'',eTo:''}}"/>
+    
+    
+    
+    <aura:attribute name="Con" type="Map" default="{'cCount':{eFrom:'',eTo:''}}"/>
+    
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInIt}"/>
+    <aura:registerEvent name="EmployeesFilterEvent" type="c:EmployeesFilterEvent"></aura:registerEvent>
+    
+	
+    	<div class="slds-p-right_xx-small">
+            <lightning:card title="Employee Search">
+       		<section class="slds-p-around_small">
+               <lightning:input type="search" class="emp-search" label="Search Employee" 
+                                value="{!v.empName}" placeholder="Ex: John/5555"  onchange="{!c.handleFilterChange}"/>
+       		 </section>
+                
+                
+    	<lightning:accordion allowMultipleSectionsOpen="true">
+        	<lightning:accordionSection name="Designation" label="Employee Designation">              
+                 <lightning:checkboxGroup name="designationGroup"
+                             options="{!v.desOptions}"
+                             value="{! v.desOption}"
+                             onchange="{! c.handleFilterChange }"/>
+                <lightning:button label="Clear" aura:id="desId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="Status" label="Employee Status">
+                <lightning:checkboxGroup name="statusGroup"                          
+                          options="{! v.statusOptions}"
+                          value="{! v.status}"
+                          type="radio"
+                          onchange="{!c.handleFilterChange}"/>
+                 <lightning:button label="Clear" aura:id="staId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="Location" label="Employee Location">
+                <lightning:checkboxGroup name="locationGroup"                          
+                          options="{! v.locations}"
+                          value="{! v.location}"
+                          type="radio"
+                          onchange="{!c.handleFilterChange}"/>
+                 <lightning:button label="Clear" aura:id="locId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="Domain" label="Domain COE">
+                <lightning:checkboxGroup name="doaminGroup"                          
+                          options="{! v.domains}"
+                          value="{! v.domain}"
+                          type="radio"
+                          onchange="{!c.handleFilterChange}"/>
+                 <lightning:button label="Clear" aura:id="domid" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="Category" label="Employee Category">
+                <lightning:checkboxGroup name="categoryGroup"                          
+                          options="{! v.categories}"
+                          value="{! v.category}"
+                          type="radio"
+                          onchange="{!c.handleFilterChange}"/>
+                <lightning:button label="Clear" aura:id="catid" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            <!--<lightning:accordionSection name="DOJ" label="Date of joining">
+                <lightning:input label="Start Date" type="date" value="{!v.DOJ.Dofjoining.eFrom}" placeholder="Ex: 01/01/2020" onchange="{!c.handleFilterChange}"></lightning:input>               
+                <lightning:input label="End Date" type="date" value="{!v.DOJ.Dofjoining.eTo}" placeholder="Ex: 01/01/2021" onchange="{!c.handleFilterChange}"></lightning:input> 
+                   <lightning:button label="Clear" aura:id="DOJid" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>-->
+            
+            <lightning:accordionSection name="Prev Admin Experien" label="Experience 1">            
+                    <lightning:input label="Experience From" value="{!v.Exp.pAdmin.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Experience To" value="{!v.Exp.pAdmin.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input> 
+                <lightning:button label="Clear" aura:id="preadminId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="Prev Development Experience" label="Experience 2">
+            	    <lightning:input label="Experience From" value="{!v.Exp.pDev.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Experience To" value="{!v.Exp.pDev.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input> 
+                   <lightning:button label="Clear" aura:id="predevId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection> 
+            
+             <lightning:accordionSection name="orther  Experience" label="Experience 3">
+            	    <lightning:input label="Experience From" value="{!v.Exp.oexp.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Experience To" value="{!v.Exp.oexp.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input> 
+                   <lightning:button label="Clear" aura:id="oId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>  
+            
+           <!-- <lightning:accordionSection name="Total Admin Experience" label="Total Admin Experience">
+                 	<lightning:input label="Experience From" value="{!v.Exp.tAdmin.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Experience To" value="{!v.Exp.tAdmin.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>
+                <lightning:button label="Clear" aura:id="totaladminId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            <lightning:accordionSection name="Total Dev Experience" label="Total Dev Experience">
+                	 <lightning:input label="Experience From" value="{!v.Exp.tDev.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Experience To" value="{!v.Exp.tDev.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>  
+                <lightning:button label="Clear" aura:id="totalpredevId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>-->
+            
+            <lightning:accordionSection name="Total IT Experience" label="Total IT Experience">
+                 	<lightning:input label="Experience From" value="{!v.Exp.tIT.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Experience To" value="{!v.Exp.tIT.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input> 
+                <lightning:button label="Clear" aura:id="totalitId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+           <!-- <lightning:accordionSection name="Count" label="Certification Count">            
+                    <lightning:input label="Count From" value="{!v.Con.cCount.eFrom}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input>               
+                    <lightning:input label="Count To" value="{!v.Con.cCount.eTo}" placeholder="Ex: 1" onchange="{!c.handleFilterChange}"></lightning:input> 
+                <lightning:button label="Clear" aura:id="ConId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>-->
+            
+        </lightning:accordion>
+                </lightning:card>
+    </div>
+   
+</aura:component>

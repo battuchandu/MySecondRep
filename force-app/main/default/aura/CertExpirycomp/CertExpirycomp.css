@@ -1,0 +1,15 @@
+.THIS.dropzone{
+        padding: 5px;
+        text-align: center;
+        font: 20pt bold 'Vollkorn';
+     	background-color: #3258a8; 
+    
+    }
+
+.THIS.text{  
+    font-size: 35px;
+    background-color:Violet;
+    }
+.THIS.image{  
+       width: 100%;
+    }

@@ -1,0 +1,51 @@
+.THIS .floatright{
+    float:right;
+}
+.THIS .bgcolor{
+    background-color:black;
+}
+.THIS .margintop{
+     margin-top: -20px;   
+}
+.THIS .slds-text-body_small {
+    font-size: 0.60rem;
+}
+.THIS .green {
+    color:green;
+}
+.THIS .orange{
+    color:orange;
+}
+.THIS .blue{
+    color:blue;
+}
+.THIS .brown{
+    color:#b12c2c;
+}
+.THIS .green{
+    color:green;
+}
+.THIS .brown{
+    color:brown;
+}
+.THIS .blue{
+    color:#004eff;
+}
+.THIS .green{
+    color:green;
+}
+.THIS .abc{
+    background-color:#135f46;
+}
+.THIS .cde{
+    background:#82b2dc;
+}
+
+.THIS .bgc{
+    background-color: black;
+    border-radius: 6px;
+    padding: 5px;
+}
+.THIS .cdfg{
+    background-color:#acbedc;;
+}

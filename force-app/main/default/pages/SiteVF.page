@@ -1,0 +1,15 @@
+<apex:page sidebar="false" showHeader="false">
+    <apex:includeLightning />
+    <script>
+    $Lightning.use("c:SiteApp", function() {  // Creates aura application dynamically
+        $Lightning.createComponent("c:SiteComp", //create a aura component dynamically from VF page      
+             { },
+            "lightning",
+          function(cmp) {
+            // do some stuff
+          });       
+        });
+    </script>
+    <div id="lightning">   
+    </div>
+</apex:page>

@@ -1,0 +1,14 @@
+<aura:component implements="flexiPage:availableForAllPageTypes">
+    <aura:attribute name="EmpId" type="String"/>
+       
+    <div>
+    	<lightning:recordForm  aura:id="myRecordForm"
+       						   recordId="{!v.EmpId}"
+        					   objectApiName="Employees__c"
+        			           layoutType="Full"
+                               columns="2"
+                               mode="edit"
+                               onsubmit="{!c.handleSubmit}" />
+    </div>
+	
+</aura:component>

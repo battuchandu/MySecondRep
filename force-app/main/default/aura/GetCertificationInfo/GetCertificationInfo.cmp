@@ -1,0 +1,20 @@
+<aura:component controller="CertificationsInformation" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="EmpId" type="string"/>
+    <aura:attribute name="CertificationList" type="Certification__c[]"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getCredentials}"/>  
+    
+    
+    <div class="infoTable">
+        <lightning:dataTable class="cerTable"
+                                 keyField="Id"
+                                 data="{!v.CertificationList}"
+                                 columns="{!v.columns}"
+                                 showRowNumberColumn="true"
+                             hideCheckboxColumn="true"/>
+    
+    </div>    
+    
+</aura:component>

@@ -1,0 +1,124 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId" access="global">
+     <aura:attribute name="searchFilter" type="string"/>
+    <aura:attribute name="filterOptions" type="List"/>
+    <aura:attribute name="searchText1" type="String"/>
+     
+  <!--  <aura:attribute name="searchText2" type="String"/> -->
+    
+    <aura:attribute name="isPickList" type="Boolean" default="false"/>
+    <aura:attribute name="isText" type="Boolean" default="true"/>
+    <aura:attribute name="isCerPicklist" type="Boolean" default="false"/>
+    <aura:attribute name="filterOptions2" type="List"/>
+    
+    <aura:attribute name="labelText" type="String" default="Enter Search"/>
+    <aura:attribute name="helpText" type="String" default="Enter Search"/>
+    
+    <aura:attribute name="options" type="List"/>
+    <aura:attribute name="opt" type="String"/>
+     <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="isclosedpopup" type="boolean"/>
+    
+    
+     
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="GetCertificationsFiltersEvent" type="c:GetCertificationsFiltersEvent"></aura:registerEvent>
+    <aura:handler name="cancelEvent" event="c:closeModelevent" action="{!c.handleComponentEvent}"/>
+    
+    <div>
+             <lightning:card>
+                <!-- <aura:set attribute="actions">
+                     <lightning:button variant="brand" label="New" onclick="{! c.openModel }" />
+           <lightning:button label="Send List Email" variant="brand" title="Click to send list email" onclick="{!c.navigatetoform1}" />
+                    </aura:set>-->
+                     
+                     
+        <div class="slds-p-around_medium filters-comp">
+        <div class="slds-grid slds-wrap" >
+        <div class="slds-col slds-size_3-of-12">
+          
+            <lightning:combobox label="Select Search Filter" value="{!v.searchFilter}"
+            options="{!v.filterOptions}" variant="label-stacked"
+            fieldLevelHelp="Serach based on filter"
+            onchange="{!c.handleFilterChange}"/>
+            </div> 
+        <div class="slds-col slds-size_5-of-12">               
+             <aura:if isTrue="{!v.isCerPicklist}">            
+                   <lightning:dualListbox 
+                               sourceLabel="{!v.labelText}"
+                               selectedLabel="Selected Certifications"
+                               options="{!v.filterOptions2}"
+                               value="{!v.searchText1}"
+                               size="4"
+                               onchange="{!c.handleFilterChange}"/>                 
+              </aura:if> 
+      
+          <aura:if isTrue="{!v.isPickList}">    
+              <lightning:combobox label="{!v.labelText}" value="{!v.searchText1}"
+            					options="{!v.filterOptions2}" variant="label-stacked"
+            					fieldLevelHelp="Please select any pick list value"
+            					onchange="{!c.handleFilterChange}"/>            
+              </aura:if> 
+           <aura:if isTrue="{!v.isText}">                  
+                 
+             	<lightning:input label="{!v.labelText}" value="{!v.searchText1}" 
+                                name="searchText" placeholder="{!v.helpText}" onchange="{!c.handleFilterChange}"/>              
+              </aura:if> 
+                          </div>
+          <div class="slds-p-around_small">
+             <div class="slds-col slds-size_4-of-12">
+                  
+            </div>
+             
+              
+            </div>
+       <!--    <aura:if isTrue="{!v.isModalOpen}">
+                 <section role="dialog" tabindex="-1" aria-labelledby="modalheading01" aria-modal="true" aria-describedby="modalcontentid1" class="sldsmodal sldsfadeinopen">
+                <div class="slds-modal__container">
+                     Modal/Popup Box Header Starts here
+                    <header class="slds-modalheader">
+                        <div class="slds-p-top_small" >
+                            
+                    
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="close"
+                                             
+                                              class="slds-modal__close"/>
+                            
+                 <c:CertificationButton/>
+                        
+                        </div>
+                    </header>
+                     </div>
+                 </section>
+            </aura:if>-->
+                 
+            
+     
+         <!--      
+           <aura:set attribute="else">
+              
+             	<lightning:input label="{!v.labelText}" value="{!v.searchText1}" 
+                                name="searchText" placeholder="{!v.helpText}" onchange="{!c.handleFilterChange}"/>
+       
+           </aura:set> -->
+            
+         
+        
+          <!--  <lightning:input label="Enter Search Text" value="{!v.searchText1}" 
+                                name="searchText" placeholder="Search" onchange="{!c.handleFilterChange}"/> -->
+        </div>
+   <!-- <div class="slds-col slds-size_3-of-12">        
+            <lightning:input label="Enter Search Text for Experience" value="{!v.searchText2}" 
+                                name="searchText" placeholder="Search" onchange="{!c.handleFilterChange}"/>        
+    </div> --> 
+ </div>
+    
+        
+        </lightning:card>
+        
+    </div>
+          
+    
+    
+</aura:component>

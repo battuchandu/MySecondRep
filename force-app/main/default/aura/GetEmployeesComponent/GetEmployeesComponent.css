@@ -1,0 +1,7 @@
+/*.THIS .card-bg-color {
+    background-color:white;
+} */
+.THIS .check-selctor .slds-form-element__control {
+   display: inline-flex !important;
+
+}

@@ -1,0 +1,6 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<ui:outputURL value="https://www.wissen.com/" label="WebSite" />
+    <div >
+    <img  class="image" src="{!$Resource.Wissen}" style="width:1350px; height:250px;"/>
+    </div>
+</aura:component>

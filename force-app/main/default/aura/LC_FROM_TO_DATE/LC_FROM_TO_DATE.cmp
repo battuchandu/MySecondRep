@@ -1,0 +1,24 @@
+<aura:component controller="CL_FROM_TO_DATE" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	 <aura:attribute  name="startdate" type="date"/>
+    <aura:attribute  name="enddate" type="date"/>
+   <aura:attribute type="Employees__c[]" name="oppList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+      <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+        
+    
+   <lightning:card title="Search Upon DOJ"> 
+   <lightning:input type="Date"  label="Start Date" value="{!v.startdate}" />
+    <lightning:input type="Date"  label="End Date" value="{!v.enddate}"/>
+    <lightning:button label="Search" onclick="{!c.handle}"/>
+    </lightning:card>
+    
+        
+    
+    <lightning:datatable data="{! v.oppList }"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+            
+    
+</aura:component>

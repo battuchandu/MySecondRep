@@ -1,0 +1,233 @@
+<!--<aura:component controller="EmployeeInformation" implements="flexiPage:availableForAllPageTypes,force:appHostable">
+   -->
+<aura:component controller="EmployeeInformation" implements="force:appHostable,flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="newsel" type="Boolean" default="false"/>
+    <aura:attribute name="recID" type="Id"/>
+    
+    <aura:attribute name="isFound" type="Boolean" default="false"/>
+    
+    <aura:attribute  name="startdate" type="date"/>
+    <aura:attribute  name="enddate" type="date"/>
+    
+    <aura:attribute name="employeeList" type="Employees__c[]"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+    
+    <aura:attribute name="EmployeeId" type="String"/>
+    <aura:attribute name="isShow" type="Boolean" default="false"/>
+    <aura:attribute name="isClose" type="Boolean" default="false"/>
+    <aura:attribute name="isEdit" type="Boolean" default="false"/>
+    
+    <aura:attribute name="selector" type="List"/>
+    <aura:attribute name="selectors" type="List"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    
+    
+        
+    <!-- pagination-->
+    <aura:attribute name="page" type="integer" description="using for store page Number"/>
+    <aura:attribute name="pages" type="integer" description="using for store All Pages page Number"/>
+    <aura:attribute name="total" type="integer" description="total records count store "/>
+    <!-- multiplemails-->
+    <aura:attribute name="selIds" type="List"/>
+    <aura:attribute name="selectedRows" type="List" />
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.getAllEmployees}"/>
+    
+    <aura:handler name="EmployeesFilterEvent" event="c:EmployeesFilterEvent" 
+                  action="{!c.handleEmployeeFilter}"/>
+    <aura:if isTrue="{! v.isLoading }">
+        <lightning:spinner alternativeText="Loading" />
+    </aura:if>
+    
+    <!--<div class="slds-p-around_x-small">    
+    <lightning:card>
+    <div>
+    <c:LC_EmployeeSaveForm1/>
+    </div>
+        </lightning:card>
+    </div>-->
+    
+    <!--  <div>
+        <c:EmployeesFilterComponent/>
+    </div>  -->
+    
+    <!--   <aura:if isTrue="{!v.isTest}">
+        <div class="slds-scrollable">
+      <section role="dialog" tabindex="-1" style="position:fixed;width:300px;" class="slds-modal slds-fade-in-open">
+              <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:card title="Employees Search" iconName="standard:account">
+                 <lightning:button class="slds-modal__close"  iconName="utility:close" onclick="{!c.handleMenuClose}"></lightning:button>
+                    </lightning:card>
+                </header>
+                <div class="slds-modal__content">
+                   <c:GetEmployeesFiltersComp/>
+                </div>  
+               </div>
+           </section>
+          </div>
+    </aura:if> -->
+    <!--Get Employee Details-->
+    <div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12 slds-p-bottom_xx-small">
+                <lightning:card title="Employee Selections">
+                    <p><b> &nbsp;&nbsp;Using below option selection we can add columns in list view..
+                        </b></p>
+                    <lightning:checkboxGroup  class="check-selctor"
+                                             name="SelectorsGroup"                             
+                                             options="{!v.selectors}"
+                                             value="{!v.selector}"
+                                             onchange="{! c.handleSelectors}"/>
+                    <lightning:button label="Clear" variant="brand"  onclick="{!c.clearselect}" />
+                    <aura:set attribute="actions">
+                        
+                        <lightning:button label="New" variant="brand"  onclick="{!c.navigatetoform}" />
+                        <lightning:button label="Send Mail" onclick="{!c.sendMail}" variant="brand" iconName='utility:email'/>
+<!--<lightning:button label="Send Mail1" onclick="{!c.navigate1}" variant="brand" iconName='utility:email' />-->
+                    </aura:set>
+                    
+                </lightning:card>
+            </div>            
+        </div>
+         
+    </div>
+    
+   <!-- <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_3-of-12">
+            <div class="slds-scrollable_y" style="height:300px;">
+                <c:LC_FROM_TO_DATE/>
+            </div>
+        </div>
+    
+    </div>-->
+    
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_3-of-12">
+            <div class="slds-scrollable_y" style="height:480px;">
+                <!-- <c:getEmployeesFilters/> -->
+                
+                            <lightning:card title="Date Of Joining"> 
+                           <lightning:input type="Date"  label="Start Date" value="{!v.startdate}" placeholder="Ex: 01/01/2020" />
+                            <lightning:input type="Date"  label="End Date" value="{!v.enddate}" placeholder="Ex: 01/01/2021"/>
+                            <lightning:button label="Search" onclick="{!c.handle}"/>
+                           <!-- <lightning:button label="Clear" aura:id="totalitId" onclick="{!c.clearcheckbox}"/>-->
+                            </lightning:card>
+                            
+                <c:GetEmployeesFiltersComp/>
+            </div>
+        </div>
+       
+        
+        <div class="slds-col slds-size_9-of-12">
+            
+            <lightning:layout multipleRows="true" horizontalAlign="center">
+                <lightning:layoutItem>
+                    
+                    <!--<aura:if isTrue="{!v.isFound}">-->
+                    <div  class="card-bg-color slds-scrollable_y" style="height:380px;">
+                        <!-- <lightning:button iconName="utility:settings" variant="brand" 
+                              onclick="{!c.handleMenu}"/> -->
+                        <div class="slds-page-header" role="banner">
+                            
+                            <p class="slds-page-header__title slds-truncate">{!v.total} Employees • page {!v.page} / {!v.pages}</p>
+                            <div style="width:20%;">
+                                <ui:inputSelect aura:id="recordSize" label="Display Record Per Page: " change="{!c.onSelectChange}">
+                                    <ui:inputSelectOption text="10" label="10" value="true"/>
+                                    <ui:inputSelectOption text="15" label="15"/>
+                                    <ui:inputSelectOption text="20" label="20"/>
+                                </ui:inputSelect>
+                            </div>
+                        </div>
+                        <lightning:card title="Employees" iconName="standard:employee_contact">
+                            <aura:set attribute="actions">
+                                
+                            </aura:set>
+                            
+                            <lightning:dataTable class="empTable"
+                                                 keyField="Id"
+                                                 data="{!v.employeeList}"
+                                                 columns="{!v.columns}"
+                                                 
+                                                 showRowNumberColumn="false"
+                                                 hideCheckboxColumn="false"
+                                                 onrowaction="{!c.handleRowAction}"
+                                                 onrowselection="{! c.updateSelectedText}"/>
+                            
+                            
+                            
+                        </lightning:card>
+                        <div class="slds-align_absolute-center">            
+                            <lightning:button disabled="{!v.page == 1}" variant="brand" label="Previous Page" onclick="{! c.navigate }" />            
+                            <lightning:button disabled="{!v.page == v.pages}" aura:id="previousPage" variant="brand" label="Next Page" onclick="{! c.navigate }" />
+                        </div>
+                        <!-- <lightning:dataTable class="empTable"
+                                 keyField="Id"
+                                 data="{!v.employeeList}"
+                                 columns="{!v.columns}"/>  -->
+                        
+                    </div>
+                    
+                    
+                </lightning:layoutItem>
+            </lightning:layout>
+            
+        </div>
+        
+        <!-- <aura:set attribute="else">
+         <p>Records Not Found</p>
+        </aura:set>-->
+        
+        <!--  </aura:if>-->
+        
+    </div>
+    
+    <!--Show Employee details-->
+    <aura:if isTrue="{!v.isShow}">
+        <div>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:card title="Show Employee Details" iconName="standard:account">
+                            <lightning:button class="slds-modal__close" iconName="utility:close" 
+                                              onclick="{!c.handleCloseModal}"></lightning:button>
+                        </lightning:card>
+                    </header>
+                    <div class="slds-modal__content">
+                        <c:ShowEmployeeComponent EmpId="{!v.EmployeeId}"/>
+                    </div>
+                    
+                </div>
+            </section>        
+        </div>    
+    </aura:if>
+    
+    <!--Edit Employee Details-->
+    <aura:if isTrue="{!v.isEdit}">
+        <div>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:card title="Edit Employee Details" iconName="standard:account">
+                            <lightning:button class="slds-modal__close" iconName="utility:close"
+                                              onclick="{!c.handleCloseModal}">
+                            </lightning:button>
+                        </lightning:card>
+                    </header>
+                    <div class="slds-modal__content">
+                        <c:EditEmployeeComponent EmpId="{!v.EmployeeId}"/>
+                   </div>
+                    
+                </div>
+            </section>
+            
+        </div>
+    </aura:if>
+    
+    
+    
+</aura:component>

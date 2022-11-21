@@ -1,0 +1,43 @@
+<aura:component controller='Certificationpicklist' >
+    <aura:attribute name="empName" type="String"/>
+    <aura:attribute name="WissenCoes" type="List"/>
+    <aura:attribute name="WissenCoe" type="List"/>
+    
+   
+    
+    <aura:attribute name="Cerifications" type="List"/>
+    <aura:attribute name="certification" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInIt}"/>
+    <aura:registerEvent name="certificationFilterEvent" type="c:GetCertificationEvent"></aura:registerEvent>
+    
+	
+    	<div class="slds-p-right_xx-small">
+            <lightning:card title="CertificationSearch">
+       		<section class="slds-p-around_small">
+               <lightning:input type="search" class="emp-search" label="Search certification" 
+                                value="{!v.empName}" placeholder="Ex: John/5555"  onchange="{!c.handleFilterChange}"/>
+       		 </section>
+    	<lightning:accordion allowMultipleSectionsOpen="true">
+        	<lightning:accordionSection name="Designation" label="WissenCOE">              
+                 <lightning:checkboxGroup name="WissenCOEGroup"
+                             options="{!v.WissenCoes}"
+                             value="{! v.WissenCoe}"
+                             onchange="{! c.handleFilterChange }"/>
+                <lightning:button label="Clear" aura:id="desId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            <lightning:accordionSection name="Location" label="Certification">
+                <lightning:checkboxGroup name="certificationGroup"                          
+                          options="{! v.Cerifications}"
+                          value="{! v.certification}"
+                          type="radio"
+                          onchange="{!c.handleFilterChange}"/>
+                 <lightning:button label="Clear" aura:id="locId" onclick="{!c.clearcheckbox}"/>
+            </lightning:accordionSection>
+            
+            
+                </lightning:accordion>
+            </lightning:card>
+    </div>
+    
+	
+</aura:component>

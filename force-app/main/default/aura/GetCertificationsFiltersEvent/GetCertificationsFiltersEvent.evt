@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT" description="Event template">
+	<aura:attribute name="searchFilter" type="String"/>
+	<aura:attribute name="searchText1" type="string"/>
+	 <!--<aura:attribute name="searchText2" type="string"/>-->
+
+</aura:event>

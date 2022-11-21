@@ -1,0 +1,54 @@
+<aura:component implements="flexiPage:availableForAllPageTypes" >
+     <aura:attribute name="searchFilter" type="string"/>
+    <aura:attribute name="filterOptions" type="List"/>
+    <aura:attribute name="searchText1" type="String"/>
+    <aura:attribute name="searchText2" type="String"/>
+    
+    <aura:attribute name="isExperience" type="Boolean" default="false"/>
+    <aura:attribute name="labelText" type="String" default="Enter Search"/>
+    <aura:attribute name="helpText" type="String" default="Enter Search"/>
+    <aura:attribute name="msg" type="String" default=""/>
+     
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="EmployeesFilterEvent" type="c:EmployeesFilterEvent"></aura:registerEvent>
+    
+    <div>
+        <div class="slds-p-around_medium filtersComp">
+        <div class="slds-grid slds-wrap" >
+        <div class="slds-col slds-size_3-of-12">
+            <lightning:combobox label="Select Search Fileter" value="{!v.searchFilter}"
+            options="{!v.filterOptions}" variant="label-stacked"
+            fieldLevelHelp="Search based on filter"
+            onchange="{!c.handleFilterChange}"/>
+           
+        </div>
+            
+           <aura:if isTrue="{!v.isExperience}">
+               <div class="slds-col slds-size_3-of-12">
+           			 <lightning:input label="Experience From" value="{!v.searchText1}" 
+                                name="searchText" placeholder="{!v.helpText}" onchange="{!c.handleFilterChange}"/>
+       			 </div>
+   			  <div class="slds-col slds-size_3-of-12">        
+            			<lightning:input label="Experience To" value="{!v.searchText2}" 
+                                name="searchText" placeholder="{!v.helpText}" onchange="{!c.handleFilterChange}"/>        
+    			<span class="alertText">{!v.msg}</span>
+               </div>
+            
+               <aura:set attribute="else">
+               	 <div class="slds-col slds-size_3-of-12">
+           			 <lightning:input label="{!v.labelText}" value="{!v.searchText1}" 
+                                name="searchText" placeholder="{!v.helpText}" onchange="{!c.handleFilterChange}"/>
+                     
+        		  </div>
+               </aura:set>
+            </aura:if>
+            
+            
+        
+ </div>
+    
+    </div>
+    </div>
+    
+	
+</aura:component>

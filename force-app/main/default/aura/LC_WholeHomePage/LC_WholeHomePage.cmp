@@ -1,0 +1,36 @@
+<aura:component >
+    
+    <lightning:card>
+	<div class="slds-col slds-size_12-of-12">
+        <c:logo/>
+    </div>
+    </lightning:card>
+    
+    <div class="slds-col slds-size_4-of-12">
+         <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="12%" >
+        <c:LC_PICTURE/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="12%" >
+                <c:EmployeeRecords/>
+            </lightning:layoutItem>
+               <lightning:layoutItem padding="around-small" size="12%" >
+                <c:Displaycirtificate/>
+            </lightning:layoutItem>
+             
+        </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem padding="around-small" size="12%" >
+                <c:CertExpirycomp/>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem padding="around-small" size="12%" >
+                <c:Lc_Upcoming_Events/>
+            </lightning:layoutItem>
+             </lightning:layout>
+        
+         
+        
+    </div>
+    
+</aura:component>

@@ -1,0 +1,96 @@
+<aura:component>
+    <aura:attribute name="cancelbutton" type="boolean" default="false"/>
+    <aura:attribute name="inserornt" type="boolean" default="false"/>
+
+  
+    <aura:registerEvent name="cancelEvent" type="c:closeModelevent"/>
+    
+             
+     <lightning:card>
+  
+    <lightning:recordEditForm  aura:id="recordEditForm" objectApiName="Certification__c"
+                              onerror="{!c.handleError}" onsuccess="{!c.cersub}">
+        <lightning:messages />
+        
+        <center>
+            <div style="background-color: Violet;font-size: 20px;">New Certification</div>
+        </center>
+        <lightning:accordion aura:id="accordion" activeSectionName="B">
+            <lightning:accordionSection name="A" label="Certification Details">
+                <lightning:layout >
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Wissen_COE__c" />
+                    </lightning:layoutItem>
+                    
+                    <lightning:layoutItem padding="around-small" size="5%">
+                        <lightning:inputField fieldName="certification_Names_del__c" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout>
+                    
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Certifications_Date__c" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Certifications_Email__c" />
+                    </lightning:layoutItem>
+                   
+                </lightning:layout>
+                
+                <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Certficatin_staus__c" />
+                    </lightning:layoutItem>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="B" label="Next Target Certification Information">
+                <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        
+                        <lightning:inputField fieldName="Manager_Email_id__c" />
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Employee__c" />
+                        
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Next_Target_Certification__c" />
+                        
+                    </lightning:layoutItem>
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="TargetDate__c" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:accordionSection>
+            
+            <lightning:accordionSection name="B" label="Comments and Attachment Section">
+                <lightning:layout>
+                    
+                    
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Comments_del__c" />
+                    </lightning:layoutItem>
+                    
+                    
+                    <lightning:layoutItem padding="around-small" size="5%" >
+                        <lightning:inputField fieldName="Certification_Attached__c" />
+                    </lightning:layoutItem>
+                    
+                </lightning:layout>
+            </lightning:accordionSection>
+        </lightning:accordion>
+       
+         
+        <center>
+            <lightning:button type="submit" variant="brand" name="Submit" label="submit" class="slds-m-top_medium"/>
+           <lightning:button type="cancel"  variant="brand" name="cancel" label="Back" onclick="{!c.cancelModal}" class="slds-m-top_medium"/>
+        </center>
+    </lightning:recordEditForm>
+        
+         </lightning:card>
+    
+   
+   
+    
+</aura:component>

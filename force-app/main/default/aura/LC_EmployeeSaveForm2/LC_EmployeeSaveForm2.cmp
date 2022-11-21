@@ -1,0 +1,58 @@
+<aura:component controller="CL_NewEmployeeRecordCreation" implements="flexipage:availableForAllPageTypes,force:appHostable">
+     
+    
+     <aura:attribute name="NewEmp" type="Employees__c[]" default="{'sobjectType' : 'Employees__c'}"/>
+    <aura:attribute name="CheckboxValue" type="Boolean" default="false"/>
+    
+    <!--<aura:attribute name="fieldMap" type="Map"/>
+    <aura:attribute name="emp" type="Employees__c" />-->
+     
+    <!--Declare Handler-->
+   <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->  
+     
+    <!--Component Start-->
+       
+    
+    <div class="slds-align--absolute-center">
+        <lightning:input label="Name" name="Name" value="{!v.NewEmp.Name}"/>
+    </div>
+    
+    <lightning:layout horizontalAlign="space">
+        <lightning:layoutItem >
+            <div>
+                <h3 class="slds-section__title slds-theme_shade slds-size--8-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Billing Address</span>
+                </h3>
+                <br/>
+                <div class="slds-size--8-of-12">
+                    <lightning:input label="Address1 " name="Address" value="{!v.NewEmp.Address_Line1__c}"/>
+                    <br/>
+                    
+                    <lightning:input type="checkbox" aura:id="checkBoxId" label="Is Shipping address same as Billing address" name="checkbox" onchange="{!c.onClickCheckBox}"/>
+                    <br/>
+                </div>
+            </div>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem >
+            <div>
+                <h3 class="slds-section__title slds-theme_shade slds-size--12-of-12">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Shipping Address</span>
+                </h3>
+                <br/>
+                <div class="slds-size--12-of-12">
+                    <lightning:input label="Address2 " name="Address1" value="{!v.NewEmp.Address_Line2__c}"/>
+                    <br/>
+                                   </div>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <div class="slds-align--absolute-center">
+        <lightning:button label="Save" name="Save" variant="brand" onclick="{!c.SubmitFunction}"/>
+    </div>
+    
+    
+    
+    
+   </aura:component>

@@ -1,0 +1,198 @@
+<aura:component controller="Employee" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"  access="global" >
+       <aura:attribute name="displayForm" type="boolean" default="true"/>
+       <aura:attribute name="displayOtherField" type="boolean" default="false"/>
+       <aura:attribute name="displayOtherFieldd" type="boolean" default="false"/>
+       <aura:attribute name="displayAdditional" type="boolean" default="false"/> <!--Public boolean ex{get;set;}-->
+       <aura:attribute name="confirmAdditional" type="boolean" default="false"/>
+       <aura:attribute name="displayContinuebtn" type="boolean" default="false"/>
+       <aura:attribute name="emailValid" type="boolean" default="false"/>
+       <aura:attribute name="popup" type="boolean" default="false"/>
+       <aura:attribute name="eventOptionVal" type="String"/>
+       <aura:attribute name="eventOptionVal1" type="String"/>
+       <aura:attribute name="test1" type="String"/>
+       <aura:attribute name="test2" type="String"/>
+    
+    	<aura:attribute name="deloitteinternal" type="Alumni__c" default="{'sobjectType':'Alumni__c','Event__c':'',
+                                                                           'Name':'','Last_Name__c':'','Working_Email__c':'','Primary_Contact_Number__c':'','Event_Date__c':'','Gender__c':''
+                                                                          	}" />
+      <lightning:recordEditForm objectApiName="Alumni__c"
+                              onsubmit="{!c.handleSubmit}">
+        
+       
+     <div class="slds-box" > 
+         <div class="cdfg">
+       <lightning:layout horizontalAlign="end" verticalAlign="start" multipleRows="true">      
+         <lightning:layoutItem flexibility="auto" size="12" largeDeviceSize="12" mediumDeviceSize="12" smallDeviceSize="12" padding="around-small">
+   
+         
+ <div class="bgcolor">
+     <lightning:layout horizontalAlign="start" verticalAlign="start" multipleRows="true"> 
+        <lightning:layoutItem flexibility="auto" size="12" largeDeviceSize="12" mediumDeviceSize="12" smallDeviceSize="12" padding="around-small">
+            <div class="bgcolor" onclick="{!c.clickLogo}"> <img src="/resource/Wissen" /></div>         
+              </lightning:layoutItem>
+        <lightning:layoutItem class="margintop" flexibility="auto" size="12" largeDeviceSize="3" mediumDeviceSize="3" padding="around-small">
+          <img  src="/resource/WissenInfotech" />
+        </lightning:layoutItem>          
+             <lightning:layoutItem class="margintop" flexibility="auto" size="12" largeDeviceSize="4" mediumDeviceSize="4" padding="around-small">          
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle slds-m-top_large margintopheader slds-p-bottom_medium">
+                   </h1>
+                 </lightning:layoutItem> 
+          <lightning:layoutItem class="margintop" flexibility="auto" size="12" largeDeviceSize="3" mediumDeviceSize="3" padding="around-small">
+          <img  src="/resource/WissenInfotech" />
+        </lightning:layoutItem> 
+         </lightning:layout>
+             </div>        
+    <lightning:layout horizontalAlign="center" verticalAlign="start" multipleRows="true">       
+      <lightning:layoutItem class="margintop" flexibility="auto" size="12" largeDeviceSize="8" mediumDeviceSize="8" padding="around-small">
+          
+           
+         
+                <div  class="slds-text-heading_small">This Registration page is for current Wissen professionals only please <a href="https://www.wissen.com" target="_blank">click here</a> to see Wissen Infotech company website.  </div>  <br/>                         
+              <div class="cde"> <div class="slds-box">                         
+                  <div class="slds-text-align_right"> <div class="slds-text-body_small lds"> <br/> * denotes field is required</div></div>
+                  <h1 class="slds-page-header__title slds-truncate slds-align-middle slds-p-bottom_medium blue" title="Personal Profile:">Personal Profile:</h1>                            
+                    <lightning:layoutItem class="margintop" flexibility="auto" size="12" largeDeviceSize="8" mediumDeviceSize="8" padding="around-small">                           
+                        <div class="slds-form slds-form_compound ">                                               
+                           <div class="slds-form-element slds-text-heading_small">
+                               
+                                   <!-- <lightning:input name="input" aura:id="firstname" value="{!v.deloitteinternal.Name}" label="Name" placeholder="Name" required="true" onblur="{! c.handleBlur }" />-->
+                                <lightning:inputField fieldName="Event__c" />
+                            </div>
+                              
+                          <div class="slds-form-element slds-text-heading_small">
+                               
+                                   <!-- <lightning:input name="input" aura:id="firstname" value="{!v.deloitteinternal.Name}" label="Name" placeholder="Name" required="true" onblur="{! c.handleBlur }" />
+                                <lightning:inputField fieldName="Wissen_Employee_ID__c" />-->
+                            </div>
+                            <div class="slds-form-element slds-text-heading_small">
+                                <!--<lightning:input name="input" aura:id="lastname" value="{!v.deloitteinternal.Full_Name__c}" label="Full Name" placeholder="Full Name" required="true" onblur="{! c.handleBlur }" />-->
+                                                <lightning:inputField fieldName="Name" />
+                               </div>                
+                            <div class="slds-form-element slds-text-heading_small">
+                                <!--<lightning:input type="email" name="input" value="{!v.deloitteinternal.Working_Email__c}" label="Email Address" placeholder="Working Email Id" required="true" onblur="{! c.handleBlur }" />-->
+                             <lightning:inputField fieldName="Last_Name__c" />
+                               </div>  
+                           
+                            
+                            <div  class="slds-text-heading_small">
+                               <lightning:inputField fieldName="Working_Email__c" />
+                                                   
+                            </div>
+                            
+                            
+                                  
+                                <div class="slds-form-element slds-text-heading_small">
+                             <!-- <lightning:input type="Input"  aura:id="company" name="Input" label="Company Name" placeholder="Company Name" messageWhenPatternMismatch="Please use company Name." required="true" onblur="{! c.handleEmailBlur }" />-->
+                           <!-- <lightning:inputField fieldName="Country_Code__c" />-->
+                            </div>
+                                
+                            <div class="slds-form-element slds-text-heading_small">
+                              <!--  <lightning:input type="Input"  aura:id="company" name="Input" label="Company Name" placeholder="Company Name" messageWhenPatternMismatch="Please use company Name." required="true" onblur="{! c.handleEmailBlur }" />-->
+                            <lightning:inputField fieldName="Primary_Contact_Number__c" />
+                            </div> 
+                                 <div  class="slds-text-heading_small">
+                               <lightning:inputField fieldName="Event_Date__c" />
+                                                   
+                            </div>
+                             <div  class="slds-text-heading_small">
+                               <lightning:inputField fieldName="Gender__c" />
+                                                   
+                            </div>
+                             
+                        
+                         <br/>  <!--<lightning:input type="checkbox" label="Do you want to fill Additional Information?" name="addInfo" aura:id="addInfo"  checked="{!v.displayAdditional}"  onchange="{!c.handleAdditonalInfo}"/>-->
+                            <!--<lightning:input type="toggle" label="Do you want to fill Additional Information?" name="togglevalue" checked="{!v.displayAdditional}" aura:id="addInfo" onchange="{!c.handleAdditonalInfo}" />-->
+                           
+                            
+                            <aura:if isTrue="{!v.displayAdditional}">
+                                <div class="slds-p-top_medium"> <h1 class="slds-page-header__title slds-truncate slds-align-middle slds-p-bottom_medium blue" title="Additional Information">Additional Information:</h1>  </div>
+                                 <div  class="slds-text-heading_small"> 
+                                    
+                                              
+                          <!--  <lightning:select name="Function" label="Function" onchange="{!c.doSomething}" required="true">
+                                <option value="">None</option>
+                                <option value="Audit">Audit</option>
+                                <option value="Consulting">Consulting</option>
+                                <option value="Wissen Advisory">Wissen Advisory</option>
+                                <option value="Other">Other</option>
+                                <option value="Service">Service</option>
+                                <option value="Tax">Tax</option>
+                                     </lightning:select>-->
+                                       <!--<lightning:inputField fieldName="Country__c" />-->
+                                      
+                                </div>  
+                                <div  class="slds-text-heading_small"> 
+                            <!--<lightning:select name="Event Option" label="Do you consent to having your name and employer visible to alumni and  invitees?" onchange="{!c.doSomething}" required="true">
+                                <option value="">None</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </lightning:select> -->
+                                   <!-- <lightning:inputField fieldName="Company_Location__c" />-->
+                                   
+                                </div>
+                                <div  class="slds-text-heading_small">                 
+                            <!--<lightning:select name="Event Option" label="Do you consent to the possibility of having your picture taken during the event for potential use in Alumni Relations communications?" onchange="{!c.doSomething}" required="true">
+                                <option value="">None</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                                </lightning:select>-->
+                                     <lightning:inputField fieldName="Event_Date__c" />
+                                </div> 
+                                <div class="slds-form-element slds-text-heading_small">
+                              <!--  <lightning:input type="Input"  aura:id="company" name="Input" label="Company Name" placeholder="Company Name" messageWhenPatternMismatch="Please use company Name." required="true" onblur="{! c.handleEmailBlur }" />-->
+                            <lightning:inputField fieldName="Designation__c" />
+                            </div> 
+                                
+                                
+                            </aura:if>  
+                             <lightning:button type="submit" variant="brand" name="Submit" label="submit" class="slds-m-horizontal_xx-large"/>
+                                                      
+                              <!--<lightning:button label="Back" variant="brand" class="slds-m-top_medium" onclick="{!c.navigateback}" />-->
+      
+                            </div>  
+                      </lightning:layoutItem>     
+                </div> 
+                     
+                </div>
+         
+    
+          </lightning:layoutItem>
+    </lightning:layout>
+             
+             <lightning:layout horizontalAlign="spread" verticalAlign="start" multipleRows="true">
+        <lightning:layoutItem flexibility="auto" size="12" largeDeviceSize="12" mediumDeviceSize="12" padding="around-small">
+            <div class="cde"> <div class="slds-box">
+                <p><div class="slds-text-body_small"><div class="slds-text-align_right">Member of  Touche Tohmatsu Limited</div></div><div class="slds-text-body_small"><div class="slds-text-align_left"> <a href="https://www2.deloitte.com/about" target="_blank">Legal </a> &nbsp;|&nbsp; <a href="https://www2.deloitte.com/about" target="_blank"> Privacy </a> </div> </div> <br/>    
+     <div class="slds">                
+<p class="h1 slds-m-top_small slds-text-body_small">Wissen refers to one or more of Wissen Touche Tohmatsu Limited, a UK private company limited by guarantee ( DTTL ), its network of member firms, and their related entities. DTTL and each of its member firms are legally separate and independent entities. DTTL (also referred to as  Global ) does not provide services to clients. Please see <a href="https://www.Wissen.com/about" target="_blank">www.Wissen.com/about</a> for a detailed description of DTTL and its member firms.Please see <a href="https://wwwWWwissen.com/about" target="_blank">www.Wissen.com/about</a> for a detailed description of the legal structure of  LLP and its subsidiaries. Certain services may not be available to attest clients under the rules and regulations of public accounting.
+          </p>         
+              <p class="h1 slds-m-top_small slds-text-body_small"> <br/>
+     Copyright © 2017 Wissen Development LLC. All rights reserved </p></div> </p> 
+                </div> </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+     <aura:if isTrue="{!v.confirmAdditional}">
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header slds-modal__header_empty">                    
+                        <lightning:buttonIcon class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" iconName="utility:close" variant="bare" alternativeText="close" iconClass="dark" onclick="{!c.handleConfirmPopup}"/>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p> Do you want to provide additional information? Please click Yes to Proceed.</p>
+                        
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.handleConfirmNo}">No</button>
+                        <button class="slds-button slds-button_brand" onclick="{!c.handleConfirmYes}">Yes</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+            </aura:if>
+          </lightning:layoutItem>
+    </lightning:layout>
+         </div>   </div>
+    </lightning:recordEditForm>
+</aura:component>
